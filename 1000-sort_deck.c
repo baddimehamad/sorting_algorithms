@@ -22,6 +22,52 @@ deck_node_t *swap_card(deck_node_t *card, deck_node_t **deck)
 	return (current);
 }
 /**
+ *_strcmp
+ *@str1: the string
+ *@str2: the string
+ */
+int _strcmp(const char *str1, char *str2)
+{
+	size_t i = 0;
+
+	if (!str1)
+		return (0);
+	while (str1[i])
+	{
+		if (str1[i] != str2[i])
+			return (0);
+		i++;
+	}
+	if (str1[i] == '\0' && str2[i])
+		return (0);
+	return (1);
+}
+/**
+ * get_card_position
+ * @node: the node
+ */
+int get_card_position(deck_node_t *node)
+{
+	int value;
+
+	value = (*node).card->value[0] - '0';
+	if (value < 50 || value > 57)
+	{
+		if (_strcmp((*node).card->value, "Ace") == 1)
+			value = 1;
+		else if (_strcmp((*node).card->value, "10") == 1)
+			value = 10;
+		else if (_strcmp((*node).card->value, "Jack") == 1)
+			value = 11;
+		else if (_strcmp((*node).card->value, "Queen") == 1)
+			value = 12;
+		else if (_strcmp((*node).card->value, "King") == 1)
+			value = 13;
+	}
+	value += (*node).card->kind * 13;
+	return (value);
+}
+/**
  * insertion_sort_deck
  * @deck: Dobule linked deck to sort
  */
@@ -50,53 +96,9 @@ void insertion_sort_deck(deck_node_t **deck)
 		node = node->next;
 	}
 }
-/**
- *_strcmp
- *@str1: the string
- *@str2: the string
- */
-int _strcmp(const char *str1, char *str2)
-{
-	size_t i = 0;
 
-	if (str1 == '\0')
-		return (0);
-	while (str1[i])
-	{
-		if (str1[i] != str2[i])
-			return (0);
-		i++;
-	}
-	if (str1[i] == '\0' && str2[i])
-		return (0);
-	return (1);
-}
 
-/**
- * get_card_position
- * @node: the node
- */
-int get_card_position(deck_node_t *node)
-{
-	int value;
 
-	value = (*node).card->value[0] - '0';
-	if (value < 50 || value > 57)
-	{
-		if (_strcmp((*node).card->value, "Ace") == 1)
-			value = 1;
-		else if (_strcmp((*node).card->value, "10") == 1)
-			value = 10;
-		else if (_strcmp((*node).card->value, "Jack") == 1)
-			value = 11;
-		else if (_strcmp((*node).card->value, "Queen") == 1)
-			value = 12;
-		else if (_strcmp((*node).card->value, "King") == 1)
-			value = 13;
-	}
-	value += (*node).card->kind * 13;
-	return (value);
-}
 
 
 /**
