@@ -14,26 +14,6 @@ void swap(int *array, ssize_t item1, ssize_t item2)
 	array[item2] = tmp;
 }
 /**
- *qs 
- *@array: array
- *@first: array 
- *@last: array 
- *@size: array
- */
-void qs(int *array, ssize_t first, ssize_t last, int size)
-{
-	ssize_t position = 0;
-
-
-	if (first < last)
-	{
-		position = lomuto_partition(array, first, last, size);
-
-		qs(array, first, position - 1, size);
-		qs(array, position + 1, last, size);
-	}
-}
-/**
  *lomuto_partition 
  *@array: array
  *@first: array 
@@ -64,6 +44,27 @@ int lomuto_partition(int *array, ssize_t first, ssize_t last, size_t size)
 		print_array(array, size);
 	}
 	return (current);
+}
+
+/**
+ *qs 
+ *@array: array
+ *@first: array 
+ *@last: array 
+ *@size: array
+ */
+void qs(int *array, ssize_t first, ssize_t last, int size)
+{
+	ssize_t position = 0;
+
+
+	if (first < last)
+	{
+		position = lomuto_partition(array, first, last, size);
+
+		qs(array, first, position - 1, size);
+		qs(array, position + 1, last, size);
+	}
 }
 
 /**
