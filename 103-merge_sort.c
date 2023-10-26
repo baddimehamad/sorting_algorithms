@@ -1,22 +1,6 @@
 #include "sort.h"
 #include <stdio.h>
 /**
- *merge_sort 
- *@size: array
- *@array: array
- */
-void merge_sort(int *array, size_t size)
-{
-	int *tmp;
-
-	if (!array || size < 2)
-		return;
-	tmp = _calloc(size, sizeof(int));
-	mergesort(array, tmp, 0, size - 1);
-	free(tmp);
-}
-
-/**
  *_calloc
  *@nmemb: number of elemets
  *@size: bit size of each element
@@ -29,34 +13,12 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	if (nmemb == 0 || size == 0)
 		return ('\0');
 	p = malloc(nmemb * size);
-	if (p == '\0')
+	if (!p)
 		return ('\0');
 	for (i = 0; i < (nmemb * size); i++)
 		p[i] = '\0';
 	return (p);
 }
-/**
- *mergesort
- *@array: array
- *@tmp: array
- *@start: array
- *@end: array
- */
-void mergesort(int *array, int *tmp, int start, int end)
-{
-	int mid;
-
-	mid = (start + end) / 2;
-	if ((start + end) % 2 == 0)
-		mid--;
-	if (mid >= start)
-	{
-		mergesort(array, tmp, start, mid);
-		mergesort(array, tmp, mid + 1, end);
-		merge(array, tmp, start, mid, end);
-	}
-}
-
 /**
  *merge - make a merge
  *@arr: array
@@ -97,4 +59,41 @@ void merge(int *arr, int *tmp, int start, int mid, int end)
 	print_array(array_right, right);
 	printf("[Done]: ");
 	print_array(&arr[start], left + right);
+}
+/**
+ *mergesort
+ *@array: array
+ *@tmp: array
+ *@start: array
+ *@end: array
+ */
+void mergesort(int *array, int *tmp, int start, int end)
+{
+	int mid;
+
+	mid = (start + end) / 2;
+	if ((start + end) % 2 == 0)
+		mid--;
+	if (mid >= start)
+	{
+		mergesort(array, tmp, start, mid);
+		mergesort(array, tmp, mid + 1, end);
+		merge(array, tmp, start, mid, end);
+	}
+}
+
+/**
+ *merge_sort 
+ *@size: array
+ *@array: array
+ */
+void merge_sort(int *array, size_t size)
+{
+	int *tmp;
+
+	if (!array || size < 2)
+		return;
+	tmp = _calloc(size, sizeof(int));
+	mergesort(array, tmp, 0, size - 1);
+	free(tmp);
 }
