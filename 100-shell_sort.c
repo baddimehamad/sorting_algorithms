@@ -1,5 +1,20 @@
 #include "sort.h"
 /**
+*swap
+*@array: array
+*@item1: array element
+*@item2: array element
+*/
+void swap(int *array, int item1, int item2)
+{
+
+	int tmp;
+
+	tmp = array[item1];
+	array[item1] = array[item2];
+	array[item2] = tmp;
+}
+/**
  * shell_sort
  * @size: array
  * @array: list
@@ -21,19 +36,4 @@ void shell_sort(int *array, size_t size)
 		print_array(array, size);
 		gap /= 3;
 	}
-}
-/**
-*swap
-*@array: array
-*@item1: array element
-*@item2: array element
-*/
-void swap(int *array, int item1, int item2)
-{
-
-	int tmp;
-
-	tmp = array[item1];
-	array[item1] = array[item2];
-	array[item2] = tmp;
 }
