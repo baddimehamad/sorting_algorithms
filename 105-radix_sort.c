@@ -15,31 +15,6 @@ int getMax(int *arr, int n)
 	return (max);
 }
 /**
-* radix_sort
-* @array: array
-* @size: array
-*/
-void radix_sort(int *array, size_t size)
-{
-	int exp, maximum = 0;
-	int *output = '\0'; 
-
-	if (array == '\0' || size < 2)
-		return;
-
-	maximum = getMax(array, size);
-	output = malloc(size * sizeof(int));
-	if (output == '\0')
-		return;
-
-	for (exp = 1; maximum / exp > 0; exp *= 10)
-	{
-		countSort(array, size, exp, output);
-		print_array(array, size);
-	}
-	free(output);
-}
-/**
 * countSort
 * @arr: array
 * @n: array
@@ -65,4 +40,29 @@ void countSort(int *arr, size_t n, int exp, int *output)
 
 	for (i = 0; i < (int)n; i++)
 		arr[i] = output[i];
+}
+/**
+* radix_sort
+* @array: array
+* @size: array
+*/
+void radix_sort(int *array, size_t size)
+{
+	int exp, maximum = 0;
+	int *output = '\0'; 
+
+	if (!array || size < 2)
+		return;
+
+	maximum = getMax(array, size);
+	output = malloc(size * sizeof(int));
+	if (!output)
+		return;
+
+	for (exp = 1; maximum / exp > 0; exp *= 10)
+	{
+		countSort(array, size, exp, output);
+		print_array(array, size);
+	}
+	free(output);
 }
