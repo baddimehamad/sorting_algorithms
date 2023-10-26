@@ -1,6 +1,24 @@
 #include "sort.h"
 #include <stdio.h>
 /**
+ * swap 
+ * @arr: array
+ * @item1: item one
+ * @item2: item two
+ * @order: the order
+ */
+void swap(int arr[], int item1, int item2, int order)
+{
+	int temp;
+
+	if (order == (arr[item1] > arr[item2]))
+	{
+		temp = arr[item1];
+		arr[item1] = arr[item2];
+		arr[item2] = temp;
+	}
+}
+/**
  * merge 
  * @arr: array
  * @low: array
@@ -19,38 +37,6 @@ void merge(int arr[], int low, int nelemnt, int order)
 		merge(arr, low, mid, order);
 		merge(arr, low + mid, mid, order);
 	}
-}
-/**
- * swap 
- * @arr: array
- * @item1: item one
- * @item2: item two
- * @order: the order
- */
-void swap(int arr[], int item1, int item2, int order)
-{
-	int temp;
-
-	if (order == (arr[item1] > arr[item2]))
-	{
-		temp = arr[item1];
-		arr[item1] = arr[item2];
-		arr[item2] = temp;
-	}
-}
-
-/**
- * bitonic_sort
- * @array: array
- * @size: array
- */
-void bitonic_sort(int *array, size_t size)
-{
-	int order = 1;
-
-	if (!array || size < 2)
-		return;
-	bitonicsort(array, 0, size, order, size);
 }
 
 /**
@@ -92,4 +78,17 @@ void bitonicsort(int arr[], int low, int nelemnt, int order, int size)
 			print_array(&arr[low], nelemnt);
 		}
 	}
+}
+/**
+ * bitonic_sort
+ * @array: array
+ * @size: array
+ */
+void bitonic_sort(int *array, size_t size)
+{
+	int order = 1;
+
+	if (!array || size < 2)
+		return;
+	bitonicsort(array, 0, size, order, size);
 }
