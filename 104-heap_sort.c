@@ -1,32 +1,6 @@
 #include "sort.h"
 #include <stdio.h>
 
-
-/**
- * heap_sort 
- * @array: array to sort
- * @size: size of the array
- **/
-void heap_sort(int *array, size_t size)
-{
-	int i;
-
-	if (array == '\0' || size < 2)
-		return;
-
-	for (i = (size - 2) / 2; i >= 0; --i)
-		maxHeapify(array, size, i, size);
-
-
-	for (i = (size - 1); i > 0; --i)
-	{
-
-		swap(&array[0], &array[i]);
-		print_array(array, size);
-
-		maxHeapify(array, size, 0, i);
-	}
-}
 /**
  * swap
  * @a: int
@@ -65,4 +39,28 @@ void maxHeapify(int *array, size_t size, int idx, size_t n)
 		maxHeapify(array, size, largest, n);
 	}
 }
+/**
+ * heap_sort 
+ * @array: array to sort
+ * @size: size of the array
+ **/
+void heap_sort(int *array, size_t size)
+{
+	int i;
 
+	if (!array || size < 2)
+		return;
+
+	for (i = (size - 2) / 2; i >= 0; --i)
+		maxHeapify(array, size, i, size);
+
+
+	for (i = (size - 1); i > 0; --i)
+	{
+
+		swap(&array[0], &array[i]);
+		print_array(array, size);
+
+		maxHeapify(array, size, 0, i);
+	}
+}
