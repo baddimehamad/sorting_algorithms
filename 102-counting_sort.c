@@ -1,6 +1,25 @@
 #include "sort.h"
 #include <stdio.h>
 /**
+ *_calloc
+ *@nmemb: number of elemets
+ *@size: bit size of each element
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	unsigned int i = 0;
+	char *p;
+
+	if (nmemb == 0 || size == 0)
+		return ('\0');
+	p = malloc(nmemb * size);
+	if (!p)
+		return ('\0');
+	for (i = 0; i < (nmemb * size); i++)
+		p[i] = '\0';
+	return (p);
+}
+/**
  * counting_sort 
  * @array: array to sort
  * @size: array size
@@ -10,7 +29,7 @@ void counting_sort(int *array, size_t size)
 	int index, maximun = 0, *counter = '\0', *tmp = '\0';
 	size_t i;
 
-	if (array == '\0' || size < 2)
+	if (!array || size < 2)
 		return;
 	for (i = 0; i < size; i++)
 		if (array[i] > maximun)
@@ -32,23 +51,4 @@ void counting_sort(int *array, size_t size)
 	free(tmp);
 	free(counter);
 
-}
-/**
- *_calloc
- *@nmemb: number of elemets
- *@size: bit size of each element
- */
-void *_calloc(unsigned int nmemb, unsigned int size)
-{
-	unsigned int i = 0;
-	char *p;
-
-	if (nmemb == 0 || size == 0)
-		return ('\0');
-	p = malloc(nmemb * size);
-	if (p == '\0')
-		return ('\0');
-	for (i = 0; i < (nmemb * size); i++)
-		p[i] = '\0';
-	return (p);
 }
